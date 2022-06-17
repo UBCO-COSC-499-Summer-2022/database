@@ -1,5 +1,6 @@
 <?php
 
+// The namespace of this UserSeeder is namespace Database\Seeders;
 namespace Database\Seeders;
 
 use App\Models\User;
