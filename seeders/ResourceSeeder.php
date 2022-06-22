@@ -12,6 +12,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\PseudoTypes\False_;
+// Here is a test comment
 
 class ResourceSeeder extends Seeder
 {
