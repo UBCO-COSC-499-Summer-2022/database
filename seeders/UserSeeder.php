@@ -1,11 +1,11 @@
 <?php
 
-// The namespace of this UserSeeder is namespace Database\Seeders;
 namespace Database\Seeders;
 
+use App\Models\Roles;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -17,6 +17,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Empty Tables before Seeding
+        DB::table('roles')->truncate();
+        DB::table('users')->truncate();
+        // create role
+        $role = new Roles;
+        $role->role = 'Undergraduate';
+        $role->num_monthly_bookings = 8;
+        $role->frequency = 8;
+        $role->save();
+
+        // create role
+        $role = new Roles;
+        $role->role = 'faculty';
+        $role->num_monthly_bookings = 12;
+        $role->frequency = 10;
+        $role->save();
+
         // Admin Account - enter the info for you admin account
         $admin = User::create([
             'name' => 'Suyash Admin',

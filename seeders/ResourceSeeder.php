@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bookings;
 use App\Models\Buildings;
 use App\Models\Campuses;
 use App\Models\Desks;
 use App\Models\Floors;
 use App\Models\Rooms;
-use Doctrine\DBAL\Schema\Schema;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\PseudoTypes\False_;
-// Here is a test comment
 
 class ResourceSeeder extends Seeder
 {
@@ -29,7 +28,7 @@ class ResourceSeeder extends Seeder
         DB::table('floors')->truncate();
         DB::table('rooms')->truncate();
         DB::table('desks')->truncate();
-
+                
         // Create Okanagan Campus
         $campus = new Campuses;
         $campus->name = 'Okanagan';
@@ -69,6 +68,16 @@ class ResourceSeeder extends Seeder
         $desk->is_closed = TRUE;
         $desk->save();
 
+        // create user to book with desk
+        $user = User::factory()->create();
+        // create booking using this user
+        $booking = new Bookings;
+        $booking->user_id = $user->id;
+        $booking->desk_id = $desk->id;
+        $booking->book_time_start = Carbon::now();
+        $booking->book_time_end = Carbon::now();
+        $booking->save();
+
         // Create a Desk for SCI 110 Room
         $desk = new Desks;
         $desk->room_id = $room->id;
@@ -77,6 +86,22 @@ class ResourceSeeder extends Seeder
         $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
+
+        // create booking using this user
+        $booking = new Bookings;
+        $booking->user_id = $user->id;
+        $booking->desk_id = $desk->id;
+        $booking->book_time_start = Carbon::now();
+        $booking->book_time_end = Carbon::now();
+        $booking->save();
+
+        // create booking using this user
+        $booking = new Bookings;
+        $booking->user_id = $user->id;
+        $booking->desk_id = $desk->id;
+        $booking->book_time_start = Carbon::now();
+        $booking->book_time_end = Carbon::now();
+        $booking->save();
 
         // Create a Desk for SCI 110 Room
         $desk = new Desks;
