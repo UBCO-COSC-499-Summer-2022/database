@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->boolean('is_admin')->default(FALSE)->after('password');
+        Schema::create('campuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->boolean('is_closed')->default(TRUE);
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('is_admin');
-        });
+        Schema::dropIfExists('campuses');
     }
 };
