@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('event_name');
             $table->bigInteger('user_id');
             $table->bigInteger('desk_id');
-            $table->string('event_name');
             $table->timestamp('book_time_start');
             $table->timestamp('book_time_end');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
