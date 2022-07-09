@@ -76,7 +76,6 @@ class ResourceSeeder extends Seeder
         $booking->desk_id = $desk->id;
         $booking->book_time_start = Carbon::now();
         $booking->book_time_end = Carbon::now();
-        $booking->event_name = "test";
         $booking->save();
 
         // Create a Desk for SCI 110 Room
@@ -94,7 +93,6 @@ class ResourceSeeder extends Seeder
         $booking->desk_id = $desk->id;
         $booking->book_time_start = Carbon::now();
         $booking->book_time_end = Carbon::now();
-        $booking->event_name = "test";
         $booking->save();
 
         // create booking using this user
@@ -103,7 +101,6 @@ class ResourceSeeder extends Seeder
         $booking->desk_id = $desk->id;
         $booking->book_time_start = Carbon::now();
         $booking->book_time_end = Carbon::now();
-        $booking->event_name = "test";
         $booking->save();
 
         // Create a Desk for SCI 110 Room

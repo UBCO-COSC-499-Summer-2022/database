@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('event_name');
             $table->bigInteger('user_id');
             $table->bigInteger('desk_id');
             $table->timestamp('book_time_start');
