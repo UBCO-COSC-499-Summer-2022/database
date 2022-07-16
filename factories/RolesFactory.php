@@ -20,7 +20,7 @@ class RolesFactory extends Factory
             //
             'role' => $this->faker->firstName(),
             'num_monthly_bookings' => $this->faker->numberBetween(1, 9),
-            'frequency' => $this->faker->numberBetween(1, 9),
+            'book_period' => $this->faker->numberBetween(1, 9),
         ];
     }
 }

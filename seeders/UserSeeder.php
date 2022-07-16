@@ -24,28 +24,41 @@ class UserSeeder extends Seeder
         $role = new Roles;
         $role->role = 'Undergraduate';
         $role->num_monthly_bookings = 8;
-        $role->frequency = 8;
+        $role->book_period = 8;
         $role->save();
 
         // create role
         $role = new Roles;
-        $role->role = 'faculty';
+        $role->role = 'Faculty';
         $role->num_monthly_bookings = 12;
-        $role->frequency = 10;
+        $role->book_period = 10;
+        $role->save();
+
+        // create role
+        $role = new Roles;
+        $role->role = 'Graduate';
+        $role->num_monthly_bookings = 12;
+        $role->book_period = 10;
         $role->save();
 
         // Admin Account - enter the info for you admin account
         $admin = User::create([
-            'name' => 'Suyash Admin',
-            'email' => 'suyash@ubc.ca',
+            'first_name' => 'Damyn',
+            'last_name' => 'Admin',
+            'bookings_used' => 0,
+            'role_id' => $role->role_id,
+            'email' => 'damyn@ubc.ca',
             'password' => Hash::make('password'), /*default local password is "password" */
             'is_admin' => TRUE,
         ]);
 
         // User Account - enter the info for you user account
         $user = User::create([
-            'name' => 'Suyash User',
-            'email' => 'suyash@gmail.com',
+            'first_name' => 'Damyn',
+            'last_name' => 'User',
+            'bookings_used' => 0,
+            'role_id' => $role->role_id,
+            'email' => 'damyn@gmail.com',
             'password' => Hash::make('password'), /*default local password is "password" */
         ]);
     }

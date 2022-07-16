@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
+            $table->id('role_id');
             $table->char('role', 30);
             $table->integer('num_monthly_bookings');
-            $table->integer('frequency');
+            $table->integer('book_period');
             $table->timestamps();
         });
     }
