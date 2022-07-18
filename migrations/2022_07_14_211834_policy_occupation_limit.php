@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->bigInteger('role_id');
-            $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+        //
+        Schema::create('policy_occupation_limit', function (Blueprint $table) {
+            $table->id();
+            $table->integer('percentage');
+            $table->timestamps();
         });
     }
 
@@ -27,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('policy_occupation_limit');
     }
 };

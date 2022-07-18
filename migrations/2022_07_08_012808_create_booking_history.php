@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->bigInteger('role_id');
-            $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('booking_history', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('user_id');
+            $table->bigInteger('desk_id');
+            $table->timestamp('book_time_start');
+            $table->timestamp('book_time_end');
+            $table->timestamps();
         });
     }
 
@@ -27,9 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('booking_history');
     }
 };
