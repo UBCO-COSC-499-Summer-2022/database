@@ -23,8 +23,7 @@ class RoomsFactory extends Factory
             'name' => $this->faker->firstName(),
             'has_printer' => $this->faker->boolean(50),
             'has_projector' => $this->faker->boolean(50),
-            'is_closed' => $this->faker->boolean(50),
-            'room_image' => 0001,
+            'is_closed' => FALSE,
         ];
     }
 }
