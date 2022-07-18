@@ -7,8 +7,10 @@ use App\Models\Buildings;
 use App\Models\Campuses;
 use App\Models\Desks;
 use App\Models\Floors;
+use App\Models\OccupationPolicyLimit;
 use App\Models\Rooms;
 use App\Models\User;
+use App\Models\Resources;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +30,9 @@ class ResourceSeeder extends Seeder
         DB::table('floors')->truncate();
         DB::table('rooms')->truncate();
         DB::table('desks')->truncate();
+        DB::table('policy_occupation_limit')->truncate();
+        DB::table('resources')->truncate();
+        DB::table('bookings')->truncate();
                 
         // Create Okanagan Campus
         $campus = new Campuses;
@@ -45,7 +50,7 @@ class ResourceSeeder extends Seeder
         // Create 1st Floor For Science Building
         $floor = new Floors;
         $floor->building_id = $building->id;
-        $floor->floor_num = '1st Floor';
+        $floor->floor_num = 1;
         $floor->is_closed = FALSE;
         $floor->save();
 
@@ -56,7 +61,6 @@ class ResourceSeeder extends Seeder
         $room->has_printer = False;
         $room->has_projector = False;
         $room->is_closed = False;
-        $room->room_image = 0001;      // Placeholder until we have images
         $room->save();
 
         // Create a Desk for SCI 110 Room
@@ -74,8 +78,8 @@ class ResourceSeeder extends Seeder
         $booking = new Bookings;
         $booking->user_id = $user->id;
         $booking->desk_id = $desk->id;
-        $booking->book_time_start = Carbon::now();
-        $booking->book_time_end = Carbon::now();
+        $booking->book_time_start = Carbon::now('GMT-7');
+        $booking->book_time_end = Carbon::now('GMT-7');
         $booking->save();
 
         // Create a Desk for SCI 110 Room
@@ -91,16 +95,16 @@ class ResourceSeeder extends Seeder
         $booking = new Bookings;
         $booking->user_id = $user->id;
         $booking->desk_id = $desk->id;
-        $booking->book_time_start = Carbon::now();
-        $booking->book_time_end = Carbon::now();
+        $booking->book_time_start = Carbon::now('GMT-7');
+        $booking->book_time_end = Carbon::now('GMT-7');
         $booking->save();
 
         // create booking using this user
         $booking = new Bookings;
         $booking->user_id = $user->id;
         $booking->desk_id = $desk->id;
-        $booking->book_time_start = Carbon::now();
-        $booking->book_time_end = Carbon::now();
+        $booking->book_time_start = Carbon::now('GMT-7');
+        $booking->book_time_end = Carbon::now('GMT-7');
         $booking->save();
 
         // Create a Desk for SCI 110 Room
@@ -115,7 +119,7 @@ class ResourceSeeder extends Seeder
         // Create 2nd Floor For Science Building
         $floor = new Floors;
         $floor->building_id = $building->id;
-        $floor->floor_num = '2nd Floor';
+        $floor->floor_num = 2;
         $floor->is_closed = FALSE;
         $floor->save();
 
@@ -126,7 +130,6 @@ class ResourceSeeder extends Seeder
         $room->has_printer = TRUE;
         $room->has_projector = TRUE;
         $room->is_closed = False;
-        $room->room_image = 0001;      // Placeholder until we have images
         $room->save();
 
         // Create a Desk for SCI 220 Room
@@ -150,7 +153,7 @@ class ResourceSeeder extends Seeder
         // Create 3rd Floor For Science Building
         $floor = new Floors;
         $floor->building_id = $building->id;
-        $floor->floor_num = '3rd Floor';
+        $floor->floor_num = 3;
         $floor->is_closed = FALSE;
         $floor->save();
 
@@ -164,15 +167,28 @@ class ResourceSeeder extends Seeder
         // Create 1st Floor For Arts Building
         $floor = new Floors;
         $floor->building_id = $building->id;
-        $floor->floor_num = '1st Floor';
+        $floor->floor_num = 1;
         $floor->is_closed = FALSE;
         $floor->save();
 
         // Create 2nd Floor For Arts Building
         $floor = new Floors;
         $floor->building_id = $building->id;
-        $floor->floor_num = '2nd Floor';
+        $floor->floor_num = 2;
         $floor->is_closed = FALSE;
         $floor->save();
+
+        // Create Occupation Policy NOTE THIS WILL BE THE DEFAULT VALUE, no other values should be used or created, We will hard code this to set the id == 1
+        $occupation = new OccupationPolicyLimit;
+        $occupation->id = 1;
+        $occupation->percentage = 100;
+        $occupation->save();
+        
+        // Create Resource Outlet
+        $resource = new Resources;
+        $resource->resource_type = 'Outlet';
+        $resource->icon = '<i class="bi bi-outlet"></i>';
+        $resource->colour = '#2BC232';
+        $resource->save();
     }
 }
