@@ -24,21 +24,24 @@ class UserSeeder extends Seeder
         $role = new Roles;
         $role->role = 'Undergraduate';
         $role->num_monthly_bookings = 8;
-        $role->book_period = 8;
+        $role->max_booking_window = 10;
+        $role->max_booking_duration = 2;
         $role->save();
 
         // create role
         $role = new Roles;
         $role->role = 'Faculty';
         $role->num_monthly_bookings = 12;
-        $role->book_period = 10;
+        $role->max_booking_window = 21;
+        $role->max_booking_duration = 8;
         $role->save();
 
         // create role
         $role = new Roles;
         $role->role = 'Graduate';
         $role->num_monthly_bookings = 12;
-        $role->book_period = 10;
+        $role->max_booking_window = 21;
+        $role->max_booking_duration = 4;
         $role->save();
 
         // Admin Account - enter the info for you admin account
