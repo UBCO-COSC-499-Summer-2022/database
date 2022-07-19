@@ -10,7 +10,10 @@ use App\Models\Floors;
 use App\Models\OccupationPolicyLimit;
 use App\Models\Rooms;
 use App\Models\User;
+use App\Models\BookingHistory;
 use App\Models\Resources;
+use App\Models\Resources_Desks;
+use App\Models\Resources_Rooms;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +33,7 @@ class ResourceSeeder extends Seeder
         DB::table('floors')->truncate();
         DB::table('rooms')->truncate();
         DB::table('desks')->truncate();
+        DB::table('booking_history')->truncate();
         DB::table('policy_occupation_limit')->truncate();
         DB::table('resources')->truncate();
         DB::table('bookings')->truncate();
@@ -58,8 +62,7 @@ class ResourceSeeder extends Seeder
         $room = new Rooms;
         $room->floor_id = $floor->id;
         $room->name = "SCI 110";
-        $room->has_printer = False;
-        $room->has_projector = False;
+        $room->occupancy = 30;
         $room->is_closed = False;
         $room->save();
 
@@ -68,7 +71,6 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 100;
         $desk->pos_y = 100;
-        $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
 
@@ -87,7 +89,6 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 120;
         $desk->pos_y = 120;
-        $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
 
@@ -112,9 +113,41 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 140;
         $desk->pos_y = 140;
-        $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->subYear();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->subYear();
+        $booking_history->save();
+
+        $resource = new Resources;
+        $resource->resource_type = 'Lamp';
+        $resource->icon = '<i class="bi bi-outlet"></i>';
+        $resource->colour = '#2BC232';
+        $resource->save();
+
+        //Create new Desk Resource
+        $resourceDesk = new Resources_Desks;
+        $resourceDesk -> resource_id = $resource->resource_id;
+        $resourceDesk -> desk_id = $desk->id;
+        $resourceDesk->save();
+
+        //Create new Room Resource
+        $resourceRoom = new Resources_Rooms;
+        $resourceRoom -> resource_id = $resource->resource_id;
+        $resourceRoom -> room_id = $room->id;
+        $resourceRoom -> description = 'Printer';
+        $resourceRoom->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->subYear();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->subYear();
+        $booking_history->save();
 
         // Create 2nd Floor For Science Building
         $floor = new Floors;
@@ -127,8 +160,7 @@ class ResourceSeeder extends Seeder
         $room = new Rooms;
         $room->floor_id = $floor->id;
         $room->name = "SCI 220";
-        $room->has_printer = TRUE;
-        $room->has_projector = TRUE;
+        $room->occupancy = 30;
         $room->is_closed = False;
         $room->save();
 
@@ -137,16 +169,41 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 100;
         $desk->pos_y = 100;
-        $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->subYear();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->subYear();
+        $booking_history->save();
+
+        $resource = new Resources;
+        $resource->resource_type = 'Printer';
+        $resource->icon = '<i class="bi bi-outlet"></i>';
+        $resource->colour = '#2BC232';
+        $resource->save();
+
+        //Create new Desk Resource
+        $resourceDesk = new Resources_Desks;
+        $resourceDesk -> resource_id = $resource->resource_id;
+        $resourceDesk -> desk_id = $desk->id;
+        $resourceDesk->save();
+
+        //Create new Room Resource
+        $resourceRoom = new Resources_Rooms;
+        $resourceRoom -> resource_id = $resource->resource_id;
+        $resourceRoom -> room_id = $room->id;
+        $resourceRoom -> description = 'Printer';
+        $resourceRoom->save();
+        
 
         // Create a Desk for SCI 220 Room
         $desk = new Desks;
         $desk->room_id = $room->id;
         $desk->pos_x = 120;
         $desk->pos_y = 120;
-        $desk->has_outlet = TRUE;
         $desk->is_closed = TRUE;
         $desk->save();
 
@@ -177,6 +234,50 @@ class ResourceSeeder extends Seeder
         $floor->floor_num = 2;
         $floor->is_closed = FALSE;
         $floor->save();
+        
+        //Create Booking History
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7');
+        $booking_history->book_time_end = Carbon::now('GMT-7');
+        $booking_history->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7');
+        $booking_history->book_time_end = Carbon::now('GMT-7');
+        $booking_history->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->subMonth();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->subMonth();
+        $booking_history->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->addMonth();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->addMonth();
+        $booking_history->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->addYear();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->addYear();
+        $booking_history->save();
+
+        $booking_history = new BookingHistory;
+        $booking_history->user_id = $user->id;
+        $booking_history->desk_id = $desk->id;
+        $booking_history->book_time_start = Carbon::now('GMT-7')->subYear();
+        $booking_history->book_time_end = Carbon::now('GMT-7')->subYear();
+        $booking_history->save();
+
 
         // Create Occupation Policy NOTE THIS WILL BE THE DEFAULT VALUE, no other values should be used or created, We will hard code this to set the id == 1
         $occupation = new OccupationPolicyLimit;
@@ -190,5 +291,19 @@ class ResourceSeeder extends Seeder
         $resource->icon = '<i class="bi bi-outlet"></i>';
         $resource->colour = '#2BC232';
         $resource->save();
+
+        //Create new Desk Resource
+        $resourceDesk = new Resources_Desks;
+        $resourceDesk -> resource_id = $resource->resource_id;
+        $resourceDesk -> desk_id = $desk->id;
+        $resourceDesk->save();
+
+        //Create new Room Resource
+        $resourceRoom = new Resources_Rooms;
+        $resourceRoom -> resource_id = $resource->resource_id;
+        $resourceRoom -> room_id = $room->id;
+        $resourceRoom -> description = 'Printer';
+        $resourceRoom->save();
+        
     }
 }
