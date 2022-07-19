@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('room_id');
             $table->integer('pos_x');
             $table->integer('pos_y');
-            $table->boolean('has_outlet');
             $table->boolean('is_closed')->default(FALSE);
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

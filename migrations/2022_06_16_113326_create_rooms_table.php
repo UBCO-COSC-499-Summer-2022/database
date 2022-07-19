@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('floor_id');
             $table->string('name', 30);
-            $table->boolean('has_printer');
-            $table->boolean('has_projector');
+            $table->integer('occupancy');
+            $table->integer('rows')->default(0);
+            $table->integer('cols')->default(0);
             $table->boolean('is_closed')->default(FALSE);
             $table->foreign('floor_id')->references('id')->on('floors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
