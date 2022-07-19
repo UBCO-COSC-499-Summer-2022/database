@@ -22,7 +22,6 @@ class DesksFactory extends Factory
             'room_id' => Rooms::factory()->create()->id,
             'pos_x' => $this->faker->numberBetween(0, 1000),
             'pos_y' => $this->faker->numberBetween(0, 1000),
-            'has_outlet' => $this->faker->boolean(50),
             'is_closed' => FALSE,
         ];
     }
