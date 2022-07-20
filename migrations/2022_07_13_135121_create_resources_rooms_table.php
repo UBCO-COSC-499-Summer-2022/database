@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('desks', function (Blueprint $table) {
-            $table->id();
+        Schema::create('resources_rooms', function (Blueprint $table) {
+            $table->id('resource_room_id');
+            $table->bigInteger('resource_id');
             $table->bigInteger('room_id');
-            $table->integer('pos_x');
-            $table->integer('pos_y');
-            $table->boolean('is_closed')->default(FALSE);
+            $table->foreign('resource_id')->references('resource_id')->on('resources')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('description', 255)->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desks');
+        Schema::dropIfExists('resources_rooms');
     }
 };

@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buildings', function (Blueprint $table) {
+        Schema::create('booking_history', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('campus_id');
-            $table->string('name');
-            $table->boolean('is_closed')->default(FALSE);
-            $table->foreign('campus_id')->references('id')->on('campuses')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('user_id');
+            $table->bigInteger('desk_id');
+            $table->timestamp('book_time_start');
+            $table->timestamp('book_time_end');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('booking_history');
     }
 };

@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buildings', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('campus_id');
-            $table->string('name');
-            $table->boolean('is_closed')->default(FALSE);
-            $table->foreign('campus_id')->references('id')->on('campuses')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('resources', function (Blueprint $table) {
+            $table->id('resource_id');
+            $table->string('resource_type', 60);
+            $table->string('icon', 255);
+            $table->string('colour', 7);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('resources');
     }
 };

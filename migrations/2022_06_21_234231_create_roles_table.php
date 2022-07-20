@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id('role_id');
-            $table->char('role', 30);
+            $table->string('role', 30);
             $table->integer('num_monthly_bookings');
-            $table->integer('book_period');
+            $table->integer('max_booking_window');
+            $table->integer('max_booking_duration');
             $table->timestamps();
         });
     }

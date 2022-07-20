@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buildings', function (Blueprint $table) {
+        //
+        Schema::create('policy_occupation_limit', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('campus_id');
-            $table->string('name');
-            $table->boolean('is_closed')->default(FALSE);
-            $table->foreign('campus_id')->references('id')->on('campuses')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('percentage');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('policy_occupation_limit');
     }
 };
