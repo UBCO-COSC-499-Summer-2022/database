@@ -228,6 +228,16 @@ class ResourceSeeder extends Seeder
         $floor->is_closed = FALSE;
         $floor->save();
 
+        //  Create ART 100 for 1st floor
+        $room = new Rooms;
+        $room->floor_id = $floor->id;
+        $room->name = "ART 100";
+        $room->occupancy = 16;
+        $room->rows = 8;
+        $room->cols = 8;
+        $room->is_closed = False;
+        $room->save();
+
         // Create 2nd Floor For Arts Building
         $floor = new Floors;
         $floor->building_id = $building->id;
@@ -235,6 +245,16 @@ class ResourceSeeder extends Seeder
         $floor->is_closed = FALSE;
         $floor->save();
         
+        //  Create ART 200 for 2nd floor
+        $room = new Rooms;
+        $room->floor_id = $floor->id;
+        $room->name = "ART 200";
+        $room->occupancy = 16;
+        $room->rows = 8;
+        $room->cols = 8;
+        $room->is_closed = False;
+        $room->save();
+
         //Create Booking History
         $booking_history = new BookingHistory;
         $booking_history->user_id = $user->id;
