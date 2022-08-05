@@ -20,15 +20,22 @@ class UserSeeder extends Seeder
         // Empty Tables before Seeding
         DB::table('roles')->truncate();
         DB::table('users')->truncate();
-        // create role
+        // creates none role
         $role = new Roles;
-        $role->role = 'Undergraduate';
+        $role->role = 'None';
+        $role->num_monthly_bookings = 0;
+        $role->max_booking_window = 0;
+        $role->max_booking_duration = 0;
+        $role->save();
+        // create Staff role
+        $role = new Roles;
+        $role->role = 'Staff';
         $role->num_monthly_bookings = 8;
         $role->max_booking_window = 10;
         $role->max_booking_duration = 2;
         $role->save();
 
-        // create role
+        // create Faculty role
         $role = new Roles;
         $role->role = 'Faculty';
         $role->num_monthly_bookings = 12;
@@ -36,11 +43,26 @@ class UserSeeder extends Seeder
         $role->max_booking_duration = 8;
         $role->save();
 
-        // create role
+        // create Graduate role
         $role = new Roles;
         $role->role = 'Graduate';
         $role->num_monthly_bookings = 12;
         $role->max_booking_window = 21;
+        $role->max_booking_duration = 4;
+        $role->save();
+
+         // create Undergraduate role
+        $role = new Roles;
+        $role->role = 'Undergraduate';
+        $role->num_monthly_bookings = 12;
+        $role->max_booking_window = 21;
+        $role->max_booking_duration = 4;
+        $role->save();
+
+        $role = new Roles;
+        $role->role = 'Guest';
+        $role->num_monthly_bookings = 10;
+        $role->max_booking_window = 10;
         $role->max_booking_duration = 4;
         $role->save();
 
