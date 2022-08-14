@@ -71,7 +71,7 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 100;
         $desk->pos_y = 100;
-        $desk->is_closed = TRUE;
+        $desk->is_closed = FALSE;
         $desk->save();
 
         // create user to book with desk
@@ -89,7 +89,7 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 120;
         $desk->pos_y = 120;
-        $desk->is_closed = TRUE;
+        $desk->is_closed = FALSE;
         $desk->save();
 
         // create booking using this user
@@ -113,7 +113,7 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 140;
         $desk->pos_y = 140;
-        $desk->is_closed = TRUE;
+        $desk->is_closed = FALSE;
         $desk->save();
 
         $booking_history = new BookingHistory;
@@ -169,7 +169,7 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 100;
         $desk->pos_y = 100;
-        $desk->is_closed = TRUE;
+        $desk->is_closed = FALSE;
         $desk->save();
 
         $booking_history = new BookingHistory;
@@ -204,7 +204,7 @@ class ResourceSeeder extends Seeder
         $desk->room_id = $room->id;
         $desk->pos_x = 120;
         $desk->pos_y = 120;
-        $desk->is_closed = TRUE;
+        $desk->is_closed = FALSE;
         $desk->save();
 
         // Create 3rd Floor For Science Building
@@ -218,7 +218,7 @@ class ResourceSeeder extends Seeder
         $building = new Buildings;
         $building->campus_id = $campus->id;
         $building->name = 'Arts';
-        $building->is_closed = TRUE;
+        $building->is_closed = FALSE;
         $building->save();
 
         // Create 1st Floor For Arts Building
